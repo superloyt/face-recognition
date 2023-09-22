@@ -1,0 +1,11 @@
+.ant-row {
+    margin-top: 10px
+}
+
+.ant-spin-spinning {
+    position: fixed;
+    top: 50%;
+    bottom: 50%;
+    right: 0;
+    left: 0;
+}

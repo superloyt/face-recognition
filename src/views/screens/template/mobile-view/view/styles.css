@@ -1,0 +1,17 @@
+.mobile-view-container {
+    height: 100%;
+    max-width: 100%;
+    background-color: unset;
+    overflow-y: scroll;
+    position: relative;
+}
+
+.desktop-view-container {
+    height: 100vh;
+    background-color: unset;
+    margin: 0 auto;
+    overflow-y: scroll;
+	overflow-x: hidden;
+    position: relative;
+    padding: 0;
+}
