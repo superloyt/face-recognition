@@ -5,7 +5,7 @@ import View from './views';
 export default (props: IProps) => {
   const {
     webcamRef, audio, facingMode, forceScreenshotSourceSize,
-    width, height, frameRate, screenshotFormat,
+    width, height, frameRate, screenshotFormat, aspectRatio,
   } = props;
   return (
     <View
@@ -17,6 +17,7 @@ export default (props: IProps) => {
       forceScreenshotSourceSize={forceScreenshotSourceSize}
       width={width}
       height={height}
+      aspectRatio={aspectRatio}
     />
   );
 };

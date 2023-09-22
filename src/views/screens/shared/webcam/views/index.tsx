@@ -5,7 +5,7 @@ import { IProps } from './props';
 export default (props: IProps) => {
   const {
     webcamRef, audio, facingMode, forceScreenshotSourceSize,
-    width, height, frameRate, screenshotFormat,
+    width, height, frameRate, screenshotFormat, aspectRatio,
   } = props;
   return (
     <Webcam
@@ -19,6 +19,7 @@ export default (props: IProps) => {
         height,
         frameRate,
         facingMode,
+        aspectRatio,
       }}
     />
   );

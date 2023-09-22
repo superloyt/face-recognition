@@ -1,3 +1,8 @@
+export const MOBILE_RESOLUTION = {
+  width: 720,
+  height: 1280,
+};
+
 export const HD_READY_RESOLUTION = {
   width: 1280,
   height: 720,

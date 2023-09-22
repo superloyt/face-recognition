@@ -14,4 +14,5 @@ export interface IProps {
     screenshotFormat: IScreenshotFormat,
     audio: boolean,
     forceScreenshotSourceSize: boolean,
+    aspectRatio?: number,
 }

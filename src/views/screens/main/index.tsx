@@ -6,7 +6,7 @@ import { message } from 'antd';
 import isMobile from '../../../utils/is-mobile';
 import { MODEL_URLS, REAL_FACE_WIDTH, CALIBRATED_FOCAL_LENGTH } from '../../../constants/face-recogntion';
 import { IFacingMode, IFrameRate } from '../shared/webcam/views/props';
-import { HD_READY_RESOLUTION } from '../../../constants/webcam';
+import { HD_READY_RESOLUTION, MOBILE_RESOLUTION } from '../../../constants/webcam';
 import View from './views';
 import { IImageResolution } from './views/props';
 
@@ -20,7 +20,7 @@ export default () => {
   const [isFaceLoading, setIsFaceLoading] = useState<boolean>(false);
   const [image, setImage] = useState<string | null>(null);
   const [facingMode, setFacingMode] = useState<IFacingMode>('user');
-  const [imageResolution, setImageResolution] = useState<IImageResolution>(HD_READY_RESOLUTION);
+  const [imageResolution, setImageResolution] = useState<IImageResolution>(isMobile ? MOBILE_RESOLUTION : HD_READY_RESOLUTION);
   const [width, setWidth] = useState<number>(isMobile ? mobileWidthAspectRatio : HD_READY_RESOLUTION.width);
   const [height, setHeight] = useState<number>(isMobile ? phoneHeightAspectRatio : HD_READY_RESOLUTION.height);
   const [frameRate, setFrameRate] = useState<IFrameRate>(24);
@@ -108,6 +108,7 @@ export default () => {
 
   useEffect(() => {
     loadModels();
+    console.log(innerWidth, innerHeight);
   }, []);
 
   return (

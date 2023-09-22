@@ -68,6 +68,7 @@ export default (props: IProps) => {
               audio={audio}
               screenshotFormat={screenshotFormat}
               forceScreenshotSourceSize={forceScreenshotSourceSize}
+              aspectRatio={isMobile ? (9 / 16) : (16 / 9)}
             />
           </Row>
           <Row justify="center">
