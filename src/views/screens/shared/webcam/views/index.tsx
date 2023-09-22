@@ -11,12 +11,14 @@ export default (props: IProps) => {
     <Webcam
       ref={webcamRef}
       audio={audio}
+      width={480}
+      height={720}
       mirrored={facingMode === 'user'}
       screenshotFormat={screenshotFormat}
       forceScreenshotSourceSize={forceScreenshotSourceSize}
       videoConstraints={{
-        width,
-        height,
+        width: { min: 480 },
+        height: { min: 720 },
         frameRate,
         facingMode,
         aspectRatio,
