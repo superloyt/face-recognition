@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable max-len */
 import React, { useRef, useState, useEffect } from 'react';
 import Webcam from 'react-webcam';
@@ -59,7 +60,6 @@ export default () => {
       y: 200,
     });
     drawBox.draw(canvas);
-    setIsFaceLoading(false);
   };
 
   const detectFace = async () => {
@@ -100,15 +100,24 @@ export default () => {
   };
 
   const onCaptureImage = () => {
-    setIsFaceLoading(true);
     const imageSrc = webcamRef.current?.getScreenshot(imageResolution);
     setImage(imageSrc!);
-    // detectFace();
+  };
+
+  const onDetectFace = () => {
+    setIsFaceLoading(true);
+    onClearCanvas();
+    detectFace();
+    setIsFaceLoading(false);
+  };
+
+  const onRetakeImage = () => {
+    onClearCanvas();
+    setImage(null);
   };
 
   useEffect(() => {
     loadModels();
-    console.log(innerWidth, innerHeight);
   }, []);
 
   return (
@@ -130,6 +139,9 @@ export default () => {
       onSwitchCamera={onSwitchCamera}
       messageDisplay={messageDisplay}
       imageResolution={imageResolution}
+      onDetectFace={onDetectFace}
+      onRetakeImage={onRetakeImage}
+      isMobile={isMobile}
     />
   );
 };
