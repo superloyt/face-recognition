@@ -1,7 +1,40 @@
-import React, { useRef, useState, useEffect } from 'react';
+/* eslint-disable import/no-extraneous-dependencies */
+import React from 'react';
+import {
+  Row, Button, Space,
+} from 'antd';
+import { CameraOutlined, SmileOutlined } from '@ant-design/icons';
+import { IProps } from './props';
+import './styles.css';
 
-export default () => {
+export default (props: IProps) => {
+  const {
+    image, width, height,
+    onDetectFace, onRetakeImage,
+  } = props;
   return (
-    <h1>Test Face Recognition</h1>
+    <>
+      <Row justify="center">
+        <img id="imagePreview" src={image} alt="Preview" style={{ width, height }} />
+        <canvas id="faceDetection" />
+      </Row>
+      <Row justify="center">
+        <Space.Compact>
+          <Button
+            icon={<CameraOutlined />}
+            onClick={onRetakeImage}
+          >
+            Retake Image
+          </Button>
+          <Button
+            type="primary"
+            icon={<SmileOutlined />}
+            onClick={onDetectFace}
+          >
+            Detect Face
+          </Button>
+        </Space.Compact>
+      </Row>
+    </>
   );
 };
