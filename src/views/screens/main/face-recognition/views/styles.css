@@ -2,3 +2,7 @@
     position: absolute;
     top: 0;
 }
+
+.ant-row {
+    margin-top: 10px
+}
