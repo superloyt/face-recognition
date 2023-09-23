@@ -60,7 +60,6 @@ export default () => {
       y: 200,
     });
     drawBox.draw(canvas);
-    setIsFaceLoading(false);
   };
 
   const detectFace = async () => {
@@ -101,14 +100,15 @@ export default () => {
   };
 
   const onCaptureImage = () => {
-    setIsFaceLoading(true);
     const imageSrc = webcamRef.current?.getScreenshot(imageResolution);
     setImage(imageSrc!);
   };
 
   const onDetectFace = () => {
+    setIsFaceLoading(true);
     onClearCanvas();
     detectFace();
+    setIsFaceLoading(false);
   };
 
   const onRetakeImage = () => {

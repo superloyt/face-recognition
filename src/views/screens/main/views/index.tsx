@@ -68,6 +68,7 @@ export default (props: IProps) => {
                 height={height}
                 onDetectFace={onDetectFace}
                 onRetakeImage={onRetakeImage}
+                isFaceLoading={isFaceLoading}
               />
             </>
           ) : (

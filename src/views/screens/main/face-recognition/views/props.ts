@@ -4,4 +4,5 @@ export interface IProps {
     height: number;
     onRetakeImage: () => void;
     onDetectFace: () => void;
+    isFaceLoading: boolean;
 }
