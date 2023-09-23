@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/img-redundant-alt */
 /* eslint-disable max-len */
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
@@ -6,8 +7,8 @@ import {
 } from 'antd';
 import { CameraOutlined, SwapOutlined, DownOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
-import isMobile from 'is-mobile';
 import Webcam from '../../shared/webcam';
+import FaceDetect from '../face-recognition';
 import { IProps } from './props';
 import './styles.css';
 import { FULL_HD_RESOLUTION, HD_READY_RESOLUTION, UHD_RESOLUTION } from '../../../../constants/webcam';
@@ -15,18 +16,19 @@ import { FULL_HD_RESOLUTION, HD_READY_RESOLUTION, UHD_RESOLUTION } from '../../.
 export default (props: IProps) => {
   const {
     webcamRef, messageDisplay,
-    facingMode, frameRate,
+    facingMode, frameRate, image,
     width, height, screenshotFormat,
     audio, forceScreenshotSourceSize,
-    isPageLoading, isFaceLoading,
+    isPageLoading, isFaceLoading, isMobile,
     onChangeResolution, onChangeFrameRate,
     onSwitchCamera, onCaptureImage,
+    onDetectFace, onRetakeImage,
   } = props;
 
   const desktopItems: MenuProps['items'] = [
-    { label: 'HD Ready', key: JSON.stringify({ width: HD_READY_RESOLUTION.width, height: HD_READY_RESOLUTION.height }) },
-    { label: 'Full HD', key: JSON.stringify({ width: FULL_HD_RESOLUTION.width, height: FULL_HD_RESOLUTION.height }) },
-    { label: 'UHD', key: JSON.stringify({ width: UHD_RESOLUTION.width, height: UHD_RESOLUTION.height }) },
+    { label: 'HD Ready', key: JSON.stringify(HD_READY_RESOLUTION) },
+    { label: 'Full HD', key: JSON.stringify(FULL_HD_RESOLUTION) },
+    { label: 'UHD', key: JSON.stringify(UHD_RESOLUTION) },
   ];
 
   const mobileItems: MenuProps['items'] = [
@@ -58,56 +60,70 @@ export default (props: IProps) => {
         <Spin />
       ) : (
         <Col>
-          <Row justify="center">
-            <Webcam
-              webcamRef={webcamRef}
-              facingMode={facingMode}
-              frameRate={frameRate}
-              width={width}
-              height={height}
-              audio={audio}
-              screenshotFormat={screenshotFormat}
-              forceScreenshotSourceSize={forceScreenshotSourceSize}
-              aspectRatio={(16 / 9)}
-            />
-          </Row>
-          <Row justify="center">
-            <Space.Compact>
-              <Button
-                icon={<SwapOutlined />}
-                onClick={onSwitchCamera}
-              >
-                Switch Camera
-              </Button>
-              <Button
-                icon={<CameraOutlined />}
-                type="primary"
-                onClick={onCaptureImage}
-              >
-                Capture Image
-              </Button>
-            </Space.Compact>
-          </Row>
-          <Row justify="center">
-            <Space.Compact>
-              <Dropdown menu={resolutionProps}>
-                <Button>
-                  <Space>
-                    Resolution
-                    <DownOutlined />
-                  </Space>
-                </Button>
-              </Dropdown>
-              <Dropdown menu={frameRateProps}>
-                <Button>
-                  <Space>
-                    Frame Rate
-                    <DownOutlined />
-                  </Space>
-                </Button>
-              </Dropdown>
-            </Space.Compact>
-          </Row>
+          {image ? (
+            <>
+              <FaceDetect
+                image={image}
+                width={width}
+                height={height}
+                onDetectFace={onDetectFace}
+                onRetakeImage={onRetakeImage}
+              />
+            </>
+          ) : (
+            <>
+              <Row justify="center">
+                <Webcam
+                  webcamRef={webcamRef}
+                  facingMode={facingMode}
+                  frameRate={frameRate}
+                  width={width}
+                  height={height}
+                  audio={audio}
+                  screenshotFormat={screenshotFormat}
+                  forceScreenshotSourceSize={forceScreenshotSourceSize}
+                  aspectRatio={isMobile ? (16 / 9) : (9 / 16)}
+                />
+              </Row>
+              <Row justify="center">
+                <Space.Compact>
+                  <Button
+                    icon={<SwapOutlined />}
+                    onClick={onSwitchCamera}
+                  >
+                    Switch Camera
+                  </Button>
+                  <Button
+                    icon={<CameraOutlined />}
+                    type="primary"
+                    onClick={onCaptureImage}
+                  >
+                    Capture Image
+                  </Button>
+                </Space.Compact>
+              </Row>
+              <Row justify="center">
+                <Space.Compact>
+                  <Dropdown menu={resolutionProps}>
+                    <Button>
+                      <Space>
+                        Resolution
+                        <DownOutlined />
+                      </Space>
+                    </Button>
+                  </Dropdown>
+                  <Dropdown menu={frameRateProps}>
+                    <Button>
+                      <Space>
+                        Frame Rate
+                        <DownOutlined />
+                      </Space>
+                    </Button>
+                  </Dropdown>
+                </Space.Compact>
+              </Row>
+            </>
+          )}
         </Col>
       )}
     </>

@@ -16,4 +16,7 @@ export type IProps = IViewProps & {
     onCaptureImage: () => void;
     messageDisplay: React.ReactElement<any, string | React.JSXElementConstructor<any>>;
     imageResolution: IImageResolution;
+    onDetectFace: () => void;
+    onRetakeImage:() => void;
+    isMobile: boolean;
 }
