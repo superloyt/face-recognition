@@ -15,7 +15,7 @@ export default (props: IProps) => {
   return (
     <>
       <Row justify="center">
-        <img id="imagePreview" src={image} alt="Preview" style={{ width: `${width}px`, height: `${height}px`, objectFit: 'cover' }} />
+        <img id="imagePreview" src={image} alt="Preview" style={{ width: `${width}px`, height: `${height}px`, objectFit: 'contain' }} />
         <canvas id="faceDetection" />
       </Row>
       <Row justify="center">
