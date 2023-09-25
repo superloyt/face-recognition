@@ -1,11 +1,15 @@
+/* eslint-disable no-console */
 /* eslint-disable no-unused-vars */
 /* eslint-disable max-len */
 import React, { useRef, useState, useEffect } from 'react';
 import Webcam from 'react-webcam';
 import * as faceapi from 'face-api.js';
 import { message } from 'antd';
+import path from 'path-browserify';
 import isMobile from '../../../utils/is-mobile';
-import { MODEL_URLS, REAL_FACE_WIDTH, CALIBRATED_FOCAL_LENGTH } from '../../../constants/face-recogntion';
+import {
+  MODEL_FILENAMES, REAL_FACE_WIDTH, CALIBRATED_FOCAL_LENGTH,
+} from '../../../constants/face-recogntion';
 import { IFacingMode, IFrameRate } from '../shared/webcam/views/props';
 import { HD_READY_RESOLUTION, MOBILE_RESOLUTION } from '../../../constants/webcam';
 import View from './views';
@@ -27,14 +31,18 @@ export default () => {
   const [frameRate, setFrameRate] = useState<IFrameRate>(24);
   let optionsTinyFaceDetector: faceapi.SsdMobilenetv1Options | faceapi.MtcnnOptions | faceapi.TinyYolov2Options | undefined;
 
+  const modelFinder = (fileName: string) => {
+    return path.join('/models', fileName);
+  };
+
   const loadModels = async () => {
     setIsPageLoading(true);
     try {
-      await faceapi.nets.ssdMobilenetv1.loadFromUri(MODEL_URLS.Mobilenetv1Model);
-      await faceapi.nets.faceRecognitionNet.loadFromUri(MODEL_URLS.FaceRecognitionModel);
-      await faceapi.nets.faceExpressionNet.loadFromUri(MODEL_URLS.FaceExpressionModel);
-      await faceapi.nets.faceLandmark68Net.loadFromUri(MODEL_URLS.FaceLandmarkModel);
-      await faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URLS.TinyFaceDetectorModel);
+      await faceapi.nets.ssdMobilenetv1.load(modelFinder(MODEL_FILENAMES.Mobilenetv1Model));
+      await faceapi.nets.tinyFaceDetector.load(modelFinder(MODEL_FILENAMES.TinyFaceDetectorModel));
+      await faceapi.nets.faceRecognitionNet.load(modelFinder(MODEL_FILENAMES.FaceRecognitionModel));
+      await faceapi.nets.faceExpressionNet.load(modelFinder(MODEL_FILENAMES.FaceExpressionModel));
+      await faceapi.nets.faceLandmark68Net.load(modelFinder(MODEL_FILENAMES.FaceLandmarkModel));
       optionsTinyFaceDetector = new faceapi.TinyFaceDetectorOptions();
     } catch (error) {
       messageApi.warning('Models did not load successfully. Refresh the page.');
@@ -63,8 +71,8 @@ export default () => {
   };
 
   const detectFace = async () => {
-    const input = await document.getElementById('imagePreview') as any;
-    const detections = await faceapi.detectAllFaces(input, optionsTinyFaceDetector).withFaceLandmarks().withFaceDescriptors();
+    const input = document.getElementById('imagePreview') as faceapi.TNetInput;
+    const detections = await faceapi.detectAllFaces(input, optionsTinyFaceDetector).withFaceLandmarks();
     if (detections.length === 0) {
       messageApi.warning('No face detected.');
       return;
@@ -76,7 +84,7 @@ export default () => {
   };
 
   const onClearCanvas = () => {
-    const canvas = document.getElementById('faceDetection') as any;
+    const canvas = document.getElementById('faceDetection') as HTMLCanvasElement;
     const context = canvas.getContext('2d');
     context.clearRect(0, 0, canvas.width, canvas.height);
     canvas.width = 0;
