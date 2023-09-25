@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import {
-  Row, Button, Space,
+  Row, Button, Space, Spin,
 } from 'antd';
 import { CameraOutlined, SmileOutlined } from '@ant-design/icons';
 import { IProps } from './props';

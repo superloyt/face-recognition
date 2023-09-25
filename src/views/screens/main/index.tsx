@@ -68,6 +68,7 @@ export default () => {
       y: 200,
     });
     drawBox.draw(canvas);
+    setIsFaceLoading(false);
   };
 
   const detectFace = async () => {
@@ -116,7 +117,6 @@ export default () => {
     setIsFaceLoading(true);
     onClearCanvas();
     detectFace();
-    setIsFaceLoading(false);
   };
 
   const onRetakeImage = () => {
