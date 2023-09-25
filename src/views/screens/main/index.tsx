@@ -74,6 +74,7 @@ export default () => {
     const detections = await faceapi.detectAllFaces(input, optionsTinyFaceDetector).withFaceLandmarks();
     if (detections.length === 0) {
       messageApi.warning('No face detected.');
+      setIsFaceLoading(false);
       return;
     }
     // eslint-disable-next-line no-restricted-syntax
@@ -112,7 +113,7 @@ export default () => {
   };
 
   const onDetectFace = () => {
-    onClearCanvas();
+    setIsFaceLoading(true);
     detectFace();
   };
 
