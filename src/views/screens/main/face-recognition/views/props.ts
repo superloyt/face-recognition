@@ -6,4 +6,5 @@ export interface IProps {
     onDetectFace: () => void;
     isFaceLoading: boolean;
     isMobile: boolean;
+    onChangeFaceLoading: (isLoading: boolean) => void;
 }

@@ -112,7 +112,6 @@ export default () => {
   };
 
   const onDetectFace = () => {
-    setIsFaceLoading(true);
     onClearCanvas();
     detectFace();
   };

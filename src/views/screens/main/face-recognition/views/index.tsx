@@ -11,6 +11,7 @@ export default (props: IProps) => {
   const {
     image, width, height, isFaceLoading,
     onDetectFace, onRetakeImage, isMobile,
+    onChangeFaceLoading,
   } = props;
   return (
     <>
@@ -36,7 +37,10 @@ export default (props: IProps) => {
             type="primary"
             size={isMobile ? 'large' : 'middle'}
             icon={<SmileOutlined />}
-            onClick={onDetectFace}
+            onClick={() => {
+              onChangeFaceLoading(true);
+              onDetectFace();
+            }}
             loading={isFaceLoading}
           >
             Detect Face
