@@ -69,6 +69,7 @@ export default () => {
   };
 
   const detectFace = async () => {
+    messageApi.info('Clicked!');
     const input = document.getElementById('imagePreview') as faceapi.TNetInput;
     const detections = await faceapi.detectAllFaces(input, optionsTinyFaceDetector).withFaceLandmarks();
     if (detections.length === 0) {
