@@ -122,6 +122,10 @@ export default () => {
     setImage(null);
   };
 
+  const onChangeFaceLoading = (isLoading: boolean) => {
+    setIsFaceLoading(isLoading);
+  };
+
   useEffect(() => {
     loadModels();
   }, []);
@@ -148,6 +152,7 @@ export default () => {
       onDetectFace={onDetectFace}
       onRetakeImage={onRetakeImage}
       isMobile={isMobile}
+      onChangeFaceLoading={onChangeFaceLoading}
     />
   );
 };

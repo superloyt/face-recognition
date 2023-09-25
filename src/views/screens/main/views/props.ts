@@ -19,4 +19,5 @@ export type IProps = IViewProps & {
     onDetectFace: () => void;
     onRetakeImage:() => void;
     isMobile: boolean;
+    onChangeFaceLoading: (isLoading: boolean) => void;
 }
