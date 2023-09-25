@@ -39,9 +39,6 @@ export default () => {
     setIsPageLoading(true);
     try {
       await faceapi.nets.ssdMobilenetv1.load(modelFinder(MODEL_FILENAMES.Mobilenetv1Model));
-      await faceapi.nets.tinyFaceDetector.load(modelFinder(MODEL_FILENAMES.TinyFaceDetectorModel));
-      await faceapi.nets.faceRecognitionNet.load(modelFinder(MODEL_FILENAMES.FaceRecognitionModel));
-      await faceapi.nets.faceExpressionNet.load(modelFinder(MODEL_FILENAMES.FaceExpressionModel));
       await faceapi.nets.faceLandmark68Net.load(modelFinder(MODEL_FILENAMES.FaceLandmarkModel));
       optionsTinyFaceDetector = new faceapi.TinyFaceDetectorOptions();
     } catch (error) {
