@@ -10,7 +10,7 @@ import './styles.css';
 export default (props: IProps) => {
   const {
     image, width, height, isFaceLoading,
-    onDetectFace, onRetakeImage,
+    onDetectFace, onRetakeImage, isMobile,
   } = props;
   return (
     <>
@@ -26,6 +26,7 @@ export default (props: IProps) => {
       <Row justify="center">
         <Space.Compact>
           <Button
+            size={isMobile ? 'large' : 'middle'}
             icon={<CameraOutlined />}
             onClick={onRetakeImage}
           >
@@ -33,6 +34,7 @@ export default (props: IProps) => {
           </Button>
           <Button
             type="primary"
+            size={isMobile ? 'large' : 'middle'}
             icon={<SmileOutlined />}
             onClick={onDetectFace}
             loading={isFaceLoading}
