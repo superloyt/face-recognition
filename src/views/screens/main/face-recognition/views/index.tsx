@@ -1,9 +1,9 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import {
-  Row, Button, Space, Spin,
+  Row, Button, Space,
 } from 'antd';
-import { CameraOutlined, SmileOutlined, LoadingOutlined } from '@ant-design/icons';
+import { CameraOutlined, SmileOutlined } from '@ant-design/icons';
 import { IProps } from './props';
 import './styles.css';
 
@@ -15,7 +15,12 @@ export default (props: IProps) => {
   return (
     <>
       <Row justify="center">
-        <img id="imagePreview" src={image} alt="Preview" style={{ width: `${width}px`, height: `${height}px`, objectFit: 'contain' }} />
+        <img
+          id="imagePreview"
+          src={image}
+          alt="Preview"
+          style={{ width: `${width}px`, height: `${height}px`, objectFit: 'contain' }}
+        />
         <canvas id="faceDetection" />
       </Row>
       <Row justify="center">

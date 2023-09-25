@@ -1,5 +1,5 @@
 import React from 'react';
-import type { IFrameRate, IProps as IViewProps } from '../../shared/webcam/views/props';
+import type { IProps as IViewProps } from '../../shared/webcam/views/props';
 
 export type IImageResolution = {
     width: number;
