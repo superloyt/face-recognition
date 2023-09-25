@@ -37,10 +37,7 @@ export default (props: IProps) => {
             type="primary"
             size={isMobile ? 'large' : 'middle'}
             icon={<SmileOutlined />}
-            onClick={() => {
-              onChangeFaceLoading(true);
-              onDetectFace();
-            }}
+            onClick={onDetectFace}
             loading={isFaceLoading}
           >
             Detect Face
