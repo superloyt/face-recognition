@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import React from 'react';
 import {
-  Row, Button, Space, Spin,
+  Row, Button, Space,
 } from 'antd';
 import { CameraOutlined, SmileOutlined } from '@ant-design/icons';
 import { IProps } from './props';
@@ -11,7 +11,6 @@ export default (props: IProps) => {
   const {
     image, width, height, isFaceLoading,
     onDetectFace, onRetakeImage, isMobile,
-    onChangeFaceLoading,
   } = props;
   return (
     <>

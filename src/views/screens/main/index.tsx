@@ -69,7 +69,6 @@ export default () => {
   };
 
   const detectFace = async () => {
-    messageApi.info('Clicked!');
     const input = document.getElementById('imagePreview') as faceapi.TNetInput;
     const detections = await faceapi.detectAllFaces(input, optionsTinyFaceDetector).withFaceLandmarks();
     if (detections.length === 0) {
@@ -122,10 +121,6 @@ export default () => {
     setImage(null);
   };
 
-  const onChangeFaceLoading = (isLoading: boolean) => {
-    setIsFaceLoading(isLoading);
-  };
-
   useEffect(() => {
     loadModels();
   }, []);
@@ -152,7 +147,6 @@ export default () => {
       onDetectFace={onDetectFace}
       onRetakeImage={onRetakeImage}
       isMobile={isMobile}
-      onChangeFaceLoading={onChangeFaceLoading}
     />
   );
 };
