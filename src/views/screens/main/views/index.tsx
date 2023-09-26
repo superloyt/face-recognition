@@ -22,7 +22,7 @@ export default (props: IProps) => {
     isPageLoading, isFaceLoading, isMobile,
     onChangeResolution, onChangeFrameRate,
     onSwitchCamera, onCaptureImage,
-    onDetectFace, onRetakeImage,
+    onDetectFace, onRetakeImage, onChangeFaceLoading,
   } = props;
 
   const desktopItems: MenuProps['items'] = [
@@ -69,6 +69,8 @@ export default (props: IProps) => {
                 onDetectFace={onDetectFace}
                 onRetakeImage={onRetakeImage}
                 isFaceLoading={isFaceLoading}
+                isMobile={isMobile}
+                onChangeFaceLoading={onChangeFaceLoading}
               />
             </>
           ) : (
@@ -89,12 +91,14 @@ export default (props: IProps) => {
               <Row justify="center">
                 <Space.Compact>
                   <Button
+                    size={isMobile ? 'large' : 'middle'}
                     icon={<SwapOutlined />}
                     onClick={onSwitchCamera}
                   >
                     Switch Camera
                   </Button>
                   <Button
+                    size={isMobile ? 'large' : 'middle'}
                     icon={<CameraOutlined />}
                     type="primary"
                     onClick={onCaptureImage}
@@ -106,7 +110,9 @@ export default (props: IProps) => {
               <Row justify="center">
                 <Space.Compact>
                   <Dropdown menu={resolutionProps}>
-                    <Button>
+                    <Button
+                      size={isMobile ? 'large' : 'middle'}
+                    >
                       <Space>
                         Resolution
                         <DownOutlined />
@@ -114,7 +120,9 @@ export default (props: IProps) => {
                     </Button>
                   </Dropdown>
                   <Dropdown menu={frameRateProps}>
-                    <Button>
+                    <Button
+                      size={isMobile ? 'large' : 'middle'}
+                    >
                       <Space>
                         Frame Rate
                         <DownOutlined />

@@ -1,5 +1,5 @@
 import React from 'react';
-import type { IFrameRate, IProps as IViewProps } from '../../shared/webcam/views/props';
+import type { IProps as IViewProps } from '../../shared/webcam/views/props';
 
 export type IImageResolution = {
     width: number;
@@ -19,4 +19,5 @@ export type IProps = IViewProps & {
     onDetectFace: () => void;
     onRetakeImage:() => void;
     isMobile: boolean;
+    onChangeFaceLoading: (isLoading: boolean) => void;
 }
