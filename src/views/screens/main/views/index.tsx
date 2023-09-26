@@ -22,7 +22,7 @@ export default (props: IProps) => {
     isPageLoading, isFaceLoading, isMobile,
     onChangeResolution, onChangeFrameRate,
     onSwitchCamera, onCaptureImage,
-    onDetectFace, onRetakeImage, onChangeFaceLoading,
+    onDetectFace, onRetakeImage,
   } = props;
 
   const desktopItems: MenuProps['items'] = [
@@ -70,7 +70,6 @@ export default (props: IProps) => {
                 onRetakeImage={onRetakeImage}
                 isFaceLoading={isFaceLoading}
                 isMobile={isMobile}
-                onChangeFaceLoading={onChangeFaceLoading}
               />
             </>
           ) : (
